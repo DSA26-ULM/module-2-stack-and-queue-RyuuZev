@@ -3,7 +3,6 @@
 
 void init(Stack* s) {
     s->top = s->data - 1;
-
 }
 
 bool isEmpty(const Stack* s) {
@@ -11,12 +10,12 @@ bool isEmpty(const Stack* s) {
 }
 
 bool isFull(const Stack* s) {
-    return s->top < s->data + MAX - 1;
+    return s->top == s->data + MAX - 1;
 }
 
 void push(Stack* s, int value) {
     if (isFull(s)) {
-        throw s->top == s->data + MAX - 1;
+        throw std::overflow_error("Stack penuh");
     }
     s->top++;
     *(s->top) = value;
