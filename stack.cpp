@@ -10,28 +10,27 @@ bool isEmpty(const Stack* s) {
 }
 
 bool isFull(const Stack* s) {
-    // Karena data adalah array statis, stack penuh jika pointer top berada di elemen terakhir
     return s->top == &(s->data[MAX - 1]);
 }
 
 void push(Stack* s, int value) {
     if (isFull(s)) {
-        throw std::overflow_error("Stack Overflow: Tidak bisa push, stack penuh.");
+        throw std::overflow_error("Stack Overflow");
     }
     if (isEmpty(s)) {
-        s->top = s->data; // Set top ke elemen pertama array
+        s->top = &(s->data[0]);
     } else {
-        s->top++;         // Geser pointer ke memori selanjutnya
+        s->top++;
     }
     *(s->top) = value;
 }
 
 void pop(Stack* s) {
     if (isEmpty(s)) {
-        throw std::underflow_error("Stack Underflow: Tidak bisa pop, stack kosong.");
+        throw std::underflow_error("Stack Underflow");
     }
-    if (s->top == s->data) {
-        s->top = nullptr; // Reset ke null jika sisa 1 elemen
+    if (s->top == &(s->data[0])) {
+        s->top = nullptr; 
     } else {
         s->top--;
     }
@@ -39,7 +38,7 @@ void pop(Stack* s) {
 
 int peek(const Stack* s) {
     if (isEmpty(s)) {
-        throw std::underflow_error("Stack Underflow: Stack kosong.");
+        throw std::underflow_error("Stack is Empty");
     }
     return *(s->top);
 }
