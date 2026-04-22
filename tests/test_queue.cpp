@@ -220,5 +220,7 @@ int main() {
     // Summary
     std::cout << "\n=== " << g_passed << " / " << (g_passed + g_failed)
               << " tests passed ===\n";
+    std::cout << "\nTekan Enter buat nutup...";
+    std::cin.get();
     return (g_failed == 0) ? 0 : 1;
 }
