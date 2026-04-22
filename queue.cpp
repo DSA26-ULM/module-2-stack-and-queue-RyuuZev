@@ -58,6 +58,7 @@ void dequeue(Queue* q) {
         }
     }
 }
+
 int front(const Queue* q) {
     if (isEmpty(q)) {
         throw std::underflow_error("Queue is Empty");
