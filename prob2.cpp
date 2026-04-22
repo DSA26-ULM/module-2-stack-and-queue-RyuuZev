@@ -4,6 +4,9 @@
 using namespace std;
 
 int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
     int n, k;
     if (!(cin >> n >> k)) return 0;
 
@@ -24,15 +27,14 @@ int main() {
     cout << current_sum;
 
     for (int i = k; i < n; i++) {
-        int keluar = front(&q);
+        current_sum = current_sum - front(&q) + A[i]; 
         dequeue(&q);
         
         enqueue(&q, A[i]);
-        current_sum = current_sum - keluar + A[i];
 
         cout << " " << current_sum;
     }
 
-    cout << endl;
+    cout << '\n'; 
     return 0;
 }

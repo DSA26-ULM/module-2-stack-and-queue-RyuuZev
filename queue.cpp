@@ -13,14 +13,7 @@ bool isEmpty(const Queue* q) {
 bool isFull(const Queue* q) {
     if (isEmpty(q)) return false;
     
-    const int* next_rear;
-    
-    if (q->rear == &(q->data[MAX - 1])) {
-        next_rear = &(q->data[0]); 
-    } else {
-        next_rear = q->rear + 1; 
-    }
-    
+    const int* next_rear = (q->rear == q->data + MAX - 1) ? q->data : q->rear + 1;
     return next_rear == q->front;
 }
 
@@ -30,14 +23,10 @@ void enqueue(Queue* q, int value) {
     }
     
     if (isEmpty(q)) {
-        q->front = &(q->data[0]);
-        q->rear = &(q->data[0]);
+        q->front = q->data;
+        q->rear = q->data;
     } else {
-        if (q->rear == &(q->data[MAX - 1])) {
-            q->rear = &(q->data[0]);
-        } else {
-            q->rear++;
-        }
+        q->rear = (q->rear == q->data + MAX - 1) ? q->data : q->rear + 1;
     }
     *(q->rear) = value;
 }
@@ -51,11 +40,7 @@ void dequeue(Queue* q) {
         q->front = nullptr;
         q->rear = nullptr;
     } else {
-        if (q->front == &(q->data[MAX - 1])) {
-            q->front = &(q->data[0]);
-        } else {
-            q->front++;
-        }
+        q->front = (q->front == q->data + MAX - 1) ? q->data : q->front + 1;
     }
 }
 
